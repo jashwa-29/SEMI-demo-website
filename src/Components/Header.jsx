@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/semi logo.png";
 
 const navItems = [
@@ -34,7 +34,7 @@ const navItems = [
   },
   {
     name: "Research",
-    link: "https://journal-website.com", // Placeholder
+    link: "https://journal-website.com",
     external: true,
   },
   {
@@ -53,8 +53,9 @@ const navItems = [
   {
     name: "Membership",
     submenu: [
-      { name: "Membership Reputation", link: "/membership/reputation" },
+      { name: "Membership Benefits", link: "/membership/benefits" },
       { name: "Become a Member", link: "/membership/join" },
+      { name: "Member Portal", link: "/membership/portal" },
     ],
   },
   { name: "Contact", link: "/contact" },
@@ -63,131 +64,148 @@ const navItems = [
 const Header = () => {
   const [openMobile, setOpenMobile] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleDropdownToggle = (name) => {
     setActiveDropdown((prev) => (prev === name ? null : name));
   };
 
   return (
-    <header className="w-full border-b border-slate-200 bg-white relative z-50">
-      {/* ===== Top blue area: contact + logo + buttons ===== */}
-      <div className="w-full ">
-        {/* Top contact bar */}
-        <div className="max-w-7xl mx-auto hidden md:flex items-center justify-end text-sm text-slate-700 py-2 pr-6 gap-4 bg-[#ffff]">
-          <span>+91 8767434355</span>
-          <span className="h-4 w-px bg-slate-300" />
-          <a
-            href="mailto:enquiries@semi.com"
-            className="hover:text-blue-700 transition-colors"
-          >
-            enquiries@semi.com
-          </a>
-        </div>
-
-        {/* Main header row */}
-        <div className="bg-[#e9f4ff]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 pb-2 pt-3 bg-[#e9f4ff]">
-          <div className="flex items-center justify-between">
-            {/* Logo + Name */}
-            <div
-              className="flex items-center gap-3 cursor-pointer"
-              onClick={() => (window.location.href = "/")}
-            >
-              <div className="flex items-center justify-center   rounded-md shadow-sm overflow-hidden">
-                <img
-                  src={logo}
-                  alt="SEMI Logo"
-                  className="w-56"
-                />
+    <header className={`w-full bg-white fixed top-0 left-0 right-0 z-50  transition-all duration-300 ${
+      scrolled ? 'shadow-xl border-b border-blue-100' : 'shadow-lg'
+    }`}>
+      {/* Top Announcement Bar - Increased padding and text */}
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 border-b border-blue-700">
+        <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-28">
+          <div className="flex items-center justify-between py-3">
+            <div className="flex items-center space-x-8 text-base text-blue-100">
+              <div className="flex items-center space-x-3">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/>
+                </svg>
+                <span className="text-[15px] font-medium">Hyderabad, India</span>
               </div>
-  
+              <div className="hidden md:flex items-center space-x-3">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-[15px] font-medium">Est. 1999</span>
+              </div>
             </div>
-
-            {/* Right controls (desktop) */}
-            <div className="hidden md:flex items-center gap-3">
-              <button className="rounded-full bg-blue-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 transition-colors">
-                Membership
-              </button>
-              <button className="rounded-full bg-blue-700 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 transition-colors">
-                Donate
-              </button>
-              <button className="rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 transition-colors">
-                Login
-              </button>
-
-              {/* Search icon */}
-              <button
-                type="button"
-                className="ml-2 flex h-10 w-10 items-center justify-center rounded-full bg-blue-900 text-white hover:bg-blue-950 transition-colors"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-4.35-4.35M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"
-                  />
+            
+            <div className="flex items-center space-x-8 text-base text-blue-100">
+              <a href="tel:+918767434355" className="flex items-center space-x-3 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-              </button>
+                <span className="hidden sm:inline text-[15px] font-medium">+91 8767434355</span>
+              </a>
+              
+              <a href="mailto:enquiries@semi.com" className="flex items-center space-x-3 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="hidden sm:inline text-[15px] font-medium">enquiries@semi.com</span>
+              </a>
             </div>
-
-            {/* Mobile hamburger */}
-            <button
-              type="button"
-              className="md:hidden inline-flex items-center justify-center rounded-md border border-slate-300 bg-white p-2 text-slate-700"
-              onClick={() => setOpenMobile((prev) => !prev)}
-            >
-              {openMobile ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 6l12 12M6 18L18 6"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
           </div>
         </div>
-</div>
       </div>
 
-      {/* ===== White nav bar (desktop) ===== */}
-      <div className="hidden md:block bg-white shadow-[0_2px_4px_rgba(0,0,0,0.04)]">
-        <div className="px-4 md:px-8 lg:px-16 py-1">
-          <nav className="flex items-center justify-center gap-6 text-lg font-medium text-slate-800">
+      {/* Main Header - Increased padding and logo size */}
+      <div className="bg-white">
+        <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-28">
+          <div className="flex items-center justify-between py-5">
+            {/* Logo - Larger size with better spacing */}
+            <div className="flex items-center space-x-6">
+              <div 
+                className="flex items-center cursor-pointer group"
+                onClick={() => (window.location.href = "/")}
+              >
+                <div className="flex items-center justify-center rounded-xl shadow-md border border-gray-100 group-hover:shadow-lg transition-all duration-300">
+                  <img
+                    src={logo}
+                    alt="Society for Emergency Medicine India"
+                    className="h-16 w-auto transition-transform group-hover:scale-105"
+                  />
+                </div>
+                <div className="hidden lg:block ml-5">
+                  <div className="text-lg font-bold text-gray-900 uppercase tracking-wide leading-tight">
+                    Society for Emergency Medicine India
+                  </div>
+                  <div className="text-sm text-gray-600 mt-2 font-medium">
+                    Leading Emergency Care Excellence Since 1999
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Actions - Larger buttons with more spacing */}
+            <div className="hidden lg:flex items-center space-x-4">
+              <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-[14px] font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:from-blue-700 hover:to-blue-800 transform hover:-translate-y-0.5">
+                Join Membership
+              </button>
+              {/* <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-[14px] font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:from-emerald-600 hover:to-emerald-700 transform hover:-translate-y-0.5">
+                Support Us
+              </button> */}
+              <button className="px-6 py-3 bg-gradient-to-r bg-gradient-to-r from-blue-600 to-blue-700 text-white text-[14px] font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:from-red-600 hover:to-red-700 transform hover:-translate-y-0.5">
+                Member Login
+              </button>
+              
+              <div className="w-px h-10 bg-gray-200 mx-4"></div>
+              
+              <button className="p-3.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Mobile Actions - Larger buttons */}
+            <div className="flex lg:hidden items-center space-x-4">
+              <button className="p-3.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+              
+              <button
+                className="p-3.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors border border-gray-200"
+                onClick={() => setOpenMobile((prev) => !prev)}
+              >
+                {openMobile ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Navigation - Increased padding and font size */}
+      <nav className="hidden lg:block bg-white border-t border-gray-100">
+        <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-28">
+          <div className="flex items-center justify-center space-x-2">
             {navItems.map((item) => (
               <div
                 key={item.name}
-                className="relative group"
+                className="relative"
                 onMouseEnter={() => setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
@@ -195,26 +213,42 @@ const Header = () => {
                   href={item.link || "#"}
                   target={item.external ? "_blank" : "_self"}
                   rel={item.external ? "noopener noreferrer" : ""}
-                  className="flex items-center gap-1 hover:text-blue-800 transition-colors py-3"
+                  className={`flex items-center space-x-2 px-6 py-4 text-[15px] font-semibold transition-all duration-200 ${
+                    activeDropdown === item.name 
+                      ? 'text-blue-700 bg-blue-50 border-b-2 border-blue-600' 
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                  }`}
                   onClick={(e) => {
                     if (item.submenu) e.preventDefault();
                   }}
                 >
-                  {item.name}
-                  {item.submenu && <span className="text-md">▾</span>}
+                  <span>{item.name}</span>
+                  {item.submenu && (
+                    <svg 
+                      className={`w-5 h-5 transition-transform duration-200 ${
+                        activeDropdown === item.name ? 'rotate-180' : ''
+                      }`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
                 </a>
 
-                {/* Desktop Dropdown */}
+                {/* Desktop Dropdown - Larger */}
                 {item.submenu && activeDropdown === item.name && (
-                  <div className="absolute left-0 top-full w-64 bg-white border border-slate-200 shadow-lg rounded-md overflow-hidden z-50">
-                    <div className="flex flex-col py-1">
+                  <div className="absolute left-0 top-full w-72 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 overflow-hidden">
+                    <div className="p-3">
                       {item.submenu.map((subItem) => (
                         <a
                           key={subItem.name}
                           href={subItem.link}
-                          className="px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                          className="flex items-center space-x-4 px-5 py-3.5 text-[15px] text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-all duration-200 group"
                         >
-                          {subItem.name}
+                          <div className="w-2 h-2 bg-blue-200 rounded-full group-hover:bg-blue-500 transition-colors"></div>
+                          <span className="font-medium">{subItem.name}</span>
                         </a>
                       ))}
                     </div>
@@ -222,56 +256,33 @@ const Header = () => {
                 )}
               </div>
             ))}
-          </nav>
+          </div>
         </div>
-      </div>
+      </nav>
 
-      {/* ===== Mobile dropdown (nav + buttons) ===== */}
+      {/* Mobile Navigation - Larger elements */}
       {openMobile && (
-        <div className="md:hidden border-t border-slate-200 bg-white">
-          <div className="px-4 py-3 flex flex-col gap-3">
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-2">
-              <button className="flex-1 rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white">
-                Membership
+        <div className="lg:hidden bg-white border-t border-gray-200 shadow-2xl max-h-[85vh] overflow-y-auto">
+          <div className="px-6 py-8 space-y-5">
+            {/* Mobile Action Buttons - Larger */}
+            <div className="grid grid-cols-2 gap-4">
+              <button className="col-span-1 px-5 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-[15px] font-semibold rounded-xl shadow-lg">
+                Join Membership
               </button>
-              <button className="flex-1 rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white">
-                Donate
+              <button className="col-span-1 px-5 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-[15px] font-semibold rounded-xl shadow-lg">
+                Support Us
               </button>
             </div>
-            <button className="w-full rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white">
-              Login
+            <button className="w-full px-5 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-[15px] font-semibold rounded-xl shadow-lg">
+              Member Login
             </button>
 
-            {/* Search box (simple) */}
-            <div className="mt-2 flex items-center gap-2 rounded-full border border-slate-300 px-3 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 text-slate-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-4.35-4.35M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"
-                />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400"
-              />
-            </div>
-
-            {/* Nav items */}
-            <nav className="mt-2 flex flex-col gap-2 text-sm font-medium text-slate-800">
+            {/* Mobile Navigation Items - Larger */}
+            <nav className="space-y-3 pt-6 border-t border-gray-100">
               {navItems.map((item) => (
-                <div key={item.name}>
+                <div key={item.name} className="border-b border-gray-100 last:border-b-0">
                   <div
-                    className="flex items-center justify-between py-1 border-b border-slate-100 text-left cursor-pointer"
+                    className="flex items-center justify-between py-4 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors cursor-pointer"
                     onClick={() => {
                       if (item.submenu) {
                         handleDropdownToggle(item.name);
@@ -281,28 +292,34 @@ const Header = () => {
                         } else {
                           window.location.href = item.link;
                         }
+                        setOpenMobile(false);
                       }
                     }}
                   >
-                    <span>{item.name}</span>
+                    <span className="font-semibold text-[15px]">{item.name}</span>
                     {item.submenu && (
-                      <span
-                        className={`text-xs transition-transform ${
-                          activeDropdown === item.name ? "rotate-180" : ""
-                        }`}
+                      <svg 
+                        className={`w-5 h-5 text-gray-400 transition-transform ${
+                          activeDropdown === item.name ? 'rotate-180' : ''
+                        }`} 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
                       >
-                        ▾
-                      </span>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
                     )}
                   </div>
-                  {/* Mobile Submenu */}
+                  
+                  {/* Mobile Submenu - Larger */}
                   {item.submenu && activeDropdown === item.name && (
-                    <div className="pl-4 flex flex-col gap-2 mt-2 border-l-2 border-slate-100">
+                    <div className="pl-8 space-y-2 py-3 border-l-2 border-blue-200 ml-4">
                       {item.submenu.map((subItem) => (
                         <a
                           key={subItem.name}
                           href={subItem.link}
-                          className="text-slate-600 hover:text-blue-700 py-1"
+                          className="block py-3.5 px-4 text-[15px] text-gray-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors font-medium"
+                          onClick={() => setOpenMobile(false)}
                         >
                           {subItem.name}
                         </a>
@@ -312,6 +329,22 @@ const Header = () => {
                 </div>
               ))}
             </nav>
+
+            {/* Contact Info in Mobile - Larger */}
+            <div className="pt-6 border-t border-gray-100 space-y-4">
+              <div className="flex items-center space-x-4 text-[15px] text-gray-600">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/>
+                </svg>
+                <span className="font-medium">Hyderabad, India</span>
+              </div>
+              <div className="flex items-center space-x-4 text-[15px] text-gray-600">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="font-medium">Established 1999</span>
+              </div>
+            </div>
           </div>
         </div>
       )}

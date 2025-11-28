@@ -73,7 +73,7 @@ const HeroSlider = () => {
   if (activeSlides.length === 0) return null;
 
   return (
-    <div className="relative w-full h-[250px] sm:h-[400px] md:h-[600px] lg:h-[530px] overflow-hidden group">
+    <div className="relative  w-full h-[250px] sm:h-[400px] md:h-[600px] lg:h-[530px] overflow-hidden group">
       {/* Slides */}
       {activeSlides.map((slide, index) => (
         <div

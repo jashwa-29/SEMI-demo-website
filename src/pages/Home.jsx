@@ -6,13 +6,13 @@ import PresidentsMessage from '../Components/PresidentsMessage'
 
 const Home = () => {
   return (
-   <>
+   <main>
    <HeroSlider />
    <PresidentsMessage/>
    <AboutSemiSection/>
    <HomeNewsEducationSection/>
    <BecomeSemiMemberSection/>
-   </>
+   </main>
   )
 }
 

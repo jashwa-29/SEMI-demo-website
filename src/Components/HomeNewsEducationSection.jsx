@@ -127,7 +127,7 @@ const HomeNewsEducationSection = () => {
   return (
     <section className="w-full bg-white">
       {/* ---------- QUICK LINKS ---------- */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 text-center">
+      <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-28 py-8 sm:py-10 text-center">
         <h2 className="text-xl sm:text-2xl font-semibold text-[#333]">
           Quick Links
         </h2>
@@ -152,7 +152,7 @@ const HomeNewsEducationSection = () => {
 
       {/* ---------- NEWS + EDUCATION SECTION ---------- */}
       <div className="bg-[#e5f4ff] py-8 sm:py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-28">
           {/* Main grid container */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             

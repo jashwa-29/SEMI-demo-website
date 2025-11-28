@@ -45,8 +45,8 @@ const AboutSemiSection = () => {
   }, [isPaused]);
 
   return (
-    <section className="w-full bg-[#e9f4ff] py-10">
-      <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-12 py-10">
+    <section className="w-full bg-[#e9f4ff] py-16">
+      <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-28 py-10">
         <div className="grid gap-8 lg:grid-cols-[52%,48%]">
           {/* ================= LEFT SIDE ================= */}
           <div>
