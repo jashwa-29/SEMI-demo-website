@@ -5,6 +5,7 @@ const slides = [
   {
     id: 1,
     image: hero1,
+    hideOnMobile: true, // Add this flag to hide on mobile
   },
   {
     id: 2,
@@ -24,26 +25,49 @@ const slides = [
 
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  // Get filtered slides for mobile
+  const filteredSlides = isMobile 
+    ? slides.filter(slide => !slide.hideOnMobile)
+    : slides;
+
+  // Adjust current slide when switching between mobile/desktop
+  useEffect(() => {
+    if (isMobile && currentSlide >= filteredSlides.length) {
+      setCurrentSlide(0);
+    }
+  }, [isMobile, currentSlide, filteredSlides.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      setCurrentSlide((prev) => (prev === filteredSlides.length - 1 ? 0 : prev + 1));
     }, 5000);
     return () => clearInterval(interval);
-  }, [currentSlide]);
+  }, [currentSlide, filteredSlides.length]);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    setCurrentSlide((prev) => (prev === filteredSlides.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev === 0 ? filteredSlides.length - 1 : prev - 1));
   };
 
   return (
     <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[450px] overflow-hidden">
       {/* Slides */}
-      {slides.map((slide, index) => (
+      {filteredSlides.map((slide, index) => (
         <div
           key={slide.id}
           className={`absolute inset-0 transition-opacity duration-500 ${
@@ -105,7 +129,7 @@ const HeroSlider = () => {
 
       {/* Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-        {slides.map((_, index) => (
+        {filteredSlides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
