@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
     
         <Header />
-        <div className="pt-52"></div>
+        <div className="lg:pt-52 pt-32"></div>
    
           <Routes>
             <Route path="/" index element={<Home />} />
