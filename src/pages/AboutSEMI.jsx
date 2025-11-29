@@ -174,54 +174,54 @@ const AboutSEMI = () => {
         </div>
       </div>
 
-      {/* Legacy Section */}
-      <div className="py-16 bg-white">
-        <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-28">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">A Legacy of Excellence</h2>
-            <div className="w-16 h-1 bg-blue-600 mx-auto"></div>
-          </div>
+     {/* Legacy Section */}
+<div className="py-16 bg-white">
+  <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-12">
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">A Legacy of Excellence</h2>
+      <div className="w-16 h-1 bg-blue-600 mx-auto"></div>
+    </div>
 
-          <div className="bg-gray-50 rounded-lg p-8 border border-gray-200">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                  For over two decades, SEMI has been at the forefront of transforming emergency care in India. 
-                  Our commitment to excellence has established new benchmarks in emergency medical services, 
-                  education, and professional development.
-                </p>
-                <div className="flex items-center justify-center lg:justify-start space-x-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600">24+</div>
-                    <div className="text-sm text-gray-600">Years of Service</div>
-                  </div>
-                  <div className="w-px h-12 bg-gray-300"></div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600">1000+</div>
-                    <div className="text-sm text-gray-600">Professionals</div>
-                  </div>
-                  <div className="w-px h-12 bg-gray-300"></div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600">1</div>
-                    <div className="text-sm text-gray-600">National Voice</div>
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Trusted Leadership</h3>
-                <p className="text-gray-600">
-                  Recognized as the authoritative voice for emergency medicine in India.
-                </p>
-              </div>
+    <div className="bg-gray-50 rounded-lg p-6 sm:p-8 border border-gray-200">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div>
+          <p className="text-gray-700 leading-relaxed mb-6 text-sm sm:text-base">
+            For over two decades, SEMI has been at the forefront of transforming emergency care in India. 
+            Our commitment to excellence has established new benchmarks in emergency medical services, 
+            education, and professional development.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-8">
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-600">24+</div>
+              <div className="text-xs sm:text-sm text-gray-600">Years of Service</div>
+            </div>
+            <div className="hidden sm:block w-px h-12 bg-gray-300"></div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-600">1000+</div>
+              <div className="text-xs sm:text-sm text-gray-600">Professionals</div>
+            </div>
+            <div className="hidden sm:block w-px h-12 bg-gray-300"></div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-600">1</div>
+              <div className="text-xs sm:text-sm text-gray-600">National Voice</div>
             </div>
           </div>
         </div>
+        <div className="text-center">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Trusted Leadership</h3>
+          <p className="text-gray-600 text-sm sm:text-base">
+            Recognized as the authoritative voice for emergency medicine in India.
+          </p>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
     </div>
   );
 };
